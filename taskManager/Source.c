@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
-#include <stdbool.h>
-
 #include "Header.h"
 
 void printOptions() {
@@ -22,41 +16,47 @@ void printOptions() {
 
 int main() {
 
-    printOptions();
+ char inputKey;
+    do {
+        printOptions();
 
-    char inputKey;
+   
 
-    printf("Please enter the operation number for the desired option: ");
-    scanf_s("%c", &inputKey);
-    printf("\n");
 
-    switch (inputKey)
-    {
-    case 'a':
-        addTask();
-        return 0;
-    case 'b':
-        deleteTask();
-        return 0;
-    case 'c':
-        //Update an existing task
-        return 0;
-    case 'd':
-        // Display a single task
-        return 0;
-    case 'e':
-        // Display a range of tasks
-        return 0;
-    case 'f':
-        displayTask();
-        return 0;
-    case 'g':
-        //Search for a task
-        return 0;
-    case 'h':
-        //Quit
-        return 0;
+        printf("Please enter the operation number for the desired option: ");
+        scanf_s("%c", &inputKey);
+        printf("\n");
 
-    }
+        switch (inputKey)
+        {
+        case 'a':
+            addTask();
+            break;
+        case 'b':
+            deleteTask();
+            break;
+        case 'c':
+            //Update an existing task
+            break;
+        case 'd':
+            // Display a single task
+            break;
+        case 'e':
+            // Display a range of tasks
+            break;
+        case 'f':
+            displayTask();
+            break;
+        case 'g':
+            //Search for a task
+            break;
+        case 'h':
+            //Quit
+            break;
+
+        }
+
+    } while (inputKey != 'h');
+
 
 }
