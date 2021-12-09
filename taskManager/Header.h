@@ -15,4 +15,5 @@ struct node* head;
 void printOptions();
 void addTask();
 void deleteTask();
+void displayRangeTask();
 void displayTask();

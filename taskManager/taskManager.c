@@ -7,7 +7,7 @@ void addTask()
     struct node* ptr = (struct node*)malloc(sizeof(struct node));
     if (ptr == NULL)
     {
-        printf("not able to add the task to the list");
+        printf("not able to add the task to the list\n");
     }
     else
     {
@@ -26,7 +26,7 @@ void addTask()
             head = ptr;
 
         }
-        printf("Task added to the list!");
+        printf("Task added to the list!\n");
 
     }
 }
@@ -45,7 +45,7 @@ void deleteTask()
         ptr = head;
         head = head->next;
         free(ptr);
-        printf("Task has been deleted");
+        printf("Task has been deleted\n");
 
     }
 }

@@ -3,60 +3,69 @@
 void printOptions() {
 
     printf("Welcome to your task manager\n");
-    printf("a) Add new task\n");
-    printf("b) Delete an existing task\n");
-    printf("c) Update an existing task\n");
-    printf("d) Display a single task\n");
-    printf("e) Display a range of tasks\n");
-    printf("f) Display all tasks\n");
-    printf("g) Search for a task\n");
-    printf("h) Quit\n");
+    printf("1) Add new task\n");
+    printf("2) Delete an existing task\n");
+    printf("3) Update an existing task\n");
+    printf("4) Display a single task\n");
+    printf("5) Display a range of tasks\n");
+    printf("6) Display all tasks\n");
+    printf("7) Search for a task\n");
+    printf("8) Quit\n");
 
 }
 
-int main() {
+int menu() {
 
- char inputKey;
-    do {
+    int inputKey;
+
         printOptions();
 
-   
-
-
         printf("Please enter the operation number for the desired option: ");
-        scanf_s("%c", &inputKey);
+        scanf_s("%d", &inputKey);
         printf("\n");
 
         switch (inputKey)
         {
-        case 'a':
+        case 1:
             addTask();
             break;
-        case 'b':
+        case 2:
             deleteTask();
             break;
-        case 'c':
+        case 3:
             //Update an existing task
             break;
-        case 'd':
+        case 4:
             // Display a single task
             break;
-        case 'e':
-             displayRangeTask();
+        case 5:
+            displayRangeTask();
             break;
-        case 'f':
+        case 6:
             displayTask();
             break;
-        case 'g':
+        case 7:
             //Search for a task
             break;
-        case 'h':
+        case 0:
             //Quit
             break;
 
         }
 
-    } while (inputKey != 'h');
 
+        return inputKey;
+
+}
+
+int main() {
+
+int Key;
+
+     do{
+
+         Key = menu();
+
+    } while (Key != 8); 
 
 }
