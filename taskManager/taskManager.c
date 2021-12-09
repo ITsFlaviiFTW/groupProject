@@ -50,6 +50,40 @@ void deleteTask()
     }
 }
 
+
+void displayRangeTask()
+{
+    int i;
+    int start;
+    int end;
+    struct node* ptr;
+    ptr = head;
+
+    printf("Input the start of the range");
+    scanf_s("%d", &start);
+
+    printf("Input the end of the range");
+    scanf_s("%d", &end);
+
+    if (ptr == NULL)
+    {
+        printf("Task List is empty\n");
+    }
+    else
+    {
+        printf("Printing the task list\n");
+
+        for (start; start < end; start++) {
+
+            printf("%d\n", ptr->val = start);
+            ptr = ptr->next;
+
+        }
+    }
+}
+
+
+
 void displayTask()
 {
     int i;

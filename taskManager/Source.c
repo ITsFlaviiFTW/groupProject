@@ -42,7 +42,7 @@ int main() {
             // Display a single task
             break;
         case 'e':
-            // Display a range of tasks
+             displayRangeTask();
             break;
         case 'f':
             displayTask();
