@@ -1,9 +1,10 @@
 #include "Header.h"
 
 
-void addTask()
-{
-    int val;
+
+void addTask() {
+
+    char val;
     struct node* ptr = (struct node*)malloc(sizeof(struct node));
     if (ptr == NULL)
     {
@@ -12,7 +13,7 @@ void addTask()
     else
     {
         printf("Enter the task: ");
-        scanf_s("%d", &val);
+        scanf("%s", &val);
         if (head == NULL)
         {
             ptr->val = val;
@@ -26,13 +27,14 @@ void addTask()
             head = ptr;
 
         }
+
         printf("Task added to the list!\n");
 
     }
+
 }
 
-void deleteTask()
-{
+void deleteTask() {
     int item;
     struct node* ptr;
     if (head == NULL)
@@ -51,9 +53,7 @@ void deleteTask()
 }
 
 
-void displayRangeTask()
-{
-    int i;
+void displayRangeTask() {
     int start;
     int end;
     struct node* ptr;
@@ -84,9 +84,7 @@ void displayRangeTask()
 
 
 
-void displayTask()
-{
-    int i;
+void displayTask() {
     struct node* ptr;
     ptr = head;
     if (ptr == NULL)
@@ -102,4 +100,5 @@ void displayTask()
             ptr = ptr->next;
         }
     }
-}
+ }
+  

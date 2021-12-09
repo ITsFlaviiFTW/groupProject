@@ -30,7 +30,7 @@ int menu() {
             addTask();
             break;
         case 2:
-            deleteTask();
+          //  deleteTask();
             break;
         case 3:
             //Update an existing task
@@ -39,10 +39,10 @@ int menu() {
             // Display a single task
             break;
         case 5:
-            displayRangeTask();
+           // displayRangeTask();
             break;
         case 6:
-            displayTask();
+          //  displayTask();
             break;
         case 7:
             //Search for a task
