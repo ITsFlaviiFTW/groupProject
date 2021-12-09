@@ -1,17 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
-#include <stdbool.h>
-
 #include "Header.h"
-
-struct node
-{
-    int val;
-    struct node* next;
-};
-struct node* head;
 
 
 void addTask()
