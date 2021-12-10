@@ -15,7 +15,7 @@ P_NODE addTask(P_NODE list)
    // trueVal = atoi(val);
 
     printf("Please insert the task: \n");
-    fgets(task, MAXLEN, stdin);
+    scanf("%s", &task);
     task[strlen(task) - 1] = '\0';
 
     //P_NODE newTask = createTask(trueVal, task);

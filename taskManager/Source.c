@@ -17,20 +17,23 @@ void printOptions() {
     printf("f) Display all tasks\n");
     printf("g) Search for a task\n");
     printf("h) Quit\n");
+    printf("Please enter the operation number for the desired option: ");
+    printf("\n");
 
 }
 
-int main() {
+int main() 
+{
 
     P_NODE list = NULL;
-
-    char inputKey;
     char task[MAXLEN];
+
     printOptions();
-    printf("Please enter the operation number for the desired option: ");
-    scanf_s("%c", &inputKey);
-    printf("\n");
+    bool continueProgram = true;
     do {
+
+        char inputKey;
+        scanf_s("%c", &inputKey);
 
         switch (inputKey)
         {
@@ -56,12 +59,11 @@ int main() {
             searchTask(list, task);
             break;
         case 'h':
-            //Quit
+            continueProgram = false;
             break;
 
         }
 
-    } while (inputKey != 'h');
-
+    } while (continueProgram == true);
 
 }
