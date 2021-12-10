@@ -1,4 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
 #include "Header.h"
+
+#define MAXLEN 50
 
 void printOptions() {
 
@@ -16,21 +22,23 @@ void printOptions() {
 
 int main() {
 
-    char inputKey;
-    do {
-        printOptions();
+    P_NODE list = NULL;
 
-        printf("Please enter the operation number for the desired option: ");
-        scanf_s("%c", &inputKey);
-        printf("\n");
+    char inputKey;
+    char task[MAXLEN];
+    printOptions();
+    printf("Please enter the operation number for the desired option: ");
+    scanf_s("%c", &inputKey);
+    printf("\n");
+    do {
 
         switch (inputKey)
         {
         case 'a':
-            addTask();
+            list = addTask(list);
             break;
         case 'b':
-            deleteTask();
+            list = deleteTask(list);
             break;
         case 'c':
             //Update an existing task
@@ -42,10 +50,10 @@ int main() {
             // Display a range of tasks
             break;
         case 'f':
-            displayTask();
+           // displayTask();
             break;
         case 'g':
-            //Search for a task
+            searchTask(list, task);
             break;
         case 'h':
             //Quit
