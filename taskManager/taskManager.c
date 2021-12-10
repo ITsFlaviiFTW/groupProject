@@ -38,6 +38,17 @@ P_NODE addTask(P_NODE list) {
     return list;
 }
 
+P_NODE createTask(char task[])
+{
+    P_NODE newTask = (P_NODE)malloc(sizeof(NODE));
+    //newTask->val = val;
+    strcpy(newTask->task, task);
+
+    newTask->next = NULL;
+    newTask->prev = NULL;
+
+    return newTask;
+}
 
 P_NODE updateList(P_NODE list, P_NODE newTask){
     if (list == NULL)

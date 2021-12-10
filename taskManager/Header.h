@@ -17,6 +17,7 @@ typedef struct node
 
 void printOptions();
 P_NODE addTask(P_NODE);
+P_NODE createTask(char[]);
 P_NODE updateList(P_NODE, P_NODE);
 P_NODE deleteTask(P_NODE);
 P_NODE displayRecentTask(P_NODE);
