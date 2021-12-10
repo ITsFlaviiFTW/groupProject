@@ -14,19 +14,18 @@ int main()
     P_NODE list = NULL; //list of tasks - empty
     char task[MAXLEN];
 
-    list = addTask(list);
     printOptions();
 
     bool continueProgram = true;
     do 
     {
         char inputKey;
-        scanf("%c", &inputKey);
+        scanf("%c%*c", &inputKey);
 
         switch (inputKey)
         {
         case 'a':
-            //list = addTask(list);
+            list = addTask(list);
             printOptions();
             break;
 
