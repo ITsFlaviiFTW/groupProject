@@ -1,71 +1,69 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
 #include "Header.h"
+
+#define MAXLEN 50
 
 void printOptions() {
 
     printf("Welcome to your task manager\n");
-    printf("1) Add new task\n");
-    printf("2) Delete an existing task\n");
-    printf("3) Update an existing task\n");
-    printf("4) Display a single task\n");
-    printf("5) Display a range of tasks\n");
-    printf("6) Display all tasks\n");
-    printf("7) Search for a task\n");
-    printf("8) Quit\n");
+    printf("a) Add new task\n");
+    printf("b) Delete an existing task\n");
+    printf("c) Update an existing task\n");
+    printf("d) Display a single task\n");
+    printf("e) Display a range of tasks\n");
+    printf("f) Display all tasks\n");
+    printf("g) Search for a task\n");
+    printf("h) Quit\n");
+    printf("Please enter the operation number for the desired option: ");
+    printf("\n");
 
 }
 
-int menu() {
+int main()
+{
 
-    int inputKey;
+    P_NODE list = NULL;
+    char task[MAXLEN];
 
-        printOptions();
+    printOptions();
+    bool continueProgram = true;
+    do {
 
-        printf("Please enter the operation number for the desired option: ");
-        scanf_s("%d", &inputKey);
-        printf("\n");
+        char inputKey;
+        scanf_s("%c", &inputKey);
 
         switch (inputKey)
         {
-        case 1:
-            addTask();
+        case 'a':
+            list = addTask(list);
             break;
-        case 2:
-          //  deleteTask();
+        case 'b':
+            list = deleteTask(list);
             break;
-        case 3:
+        case 'c':
             //Update an existing task
             break;
-        case 4:
+        case 'd':
             // Display a single task
             break;
-        case 5:
-           // displayRangeTask();
+        case 'e':
+            // Display a range of tasks
             break;
-        case 6:
-          //  displayTask();
+        case 'f':
+            displayAllTasks(list);
             break;
-        case 7:
-            //Search for a task
+        case 'g':
+            searchTask(list, task);
             break;
-        case 0:
-            //Quit
+        case 'h':
+            continueProgram = false;
             break;
 
         }
 
-
-        return inputKey;
-
-}
-
-int main() {
-
-int Key;
-
-     do{
-
-         Key = menu();
-
-    } while (Key != 8); 
+    } while (continueProgram == true);
 
 }
