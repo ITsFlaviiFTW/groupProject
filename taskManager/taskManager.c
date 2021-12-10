@@ -10,11 +10,10 @@ void printOptions(){
     printf("b) Delete an existing task\n");
     printf("c) Update an existing task\n");
     printf("d) Display most recently entered task\n");
-    printf("e) Display oldest task in the list\n");
-    printf("f) Display 'x' number of tasks\n");
-    printf("g) Display all tasks\n");
-    printf("h) Search for a task\n");
-    printf("i) Quit\n");
+    printf("e) Display 'x' number of tasks\n");
+    printf("f) Display all tasks\n");
+    printf("g) Search for a task\n");
+    printf("h) Quit\n");
     printf("Please enter the operation number for the desired option: ");
     printf("\n");
 
@@ -117,33 +116,6 @@ P_NODE displayRecentTask(P_NODE list) {
     printf("This is the most recent task within the list\n");
 
     return;
-
-}
-
-P_NODE displayOldestTask(P_NODE list) {
-
-
-    if (list == NULL) {
-
-        return NULL;
-
-    }
-
-    P_NODE currentTask = list;
-
-    if (currentTask == NULL) {
-
-        return NULL;
-
-    }
-
-    while (currentTask->next != NULL) {
-
-        currentTask = currentTask->next;
-
-    }
-
-    printf("Your oldest task is %s\n", currentTask->task);
 
 }
 
