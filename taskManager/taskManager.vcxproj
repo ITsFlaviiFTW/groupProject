@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.c" />
+    <ClCompile Include="taskManager.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
