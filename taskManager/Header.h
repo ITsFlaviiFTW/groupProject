@@ -40,7 +40,7 @@ P_NODE displayRecentTask(P_NODE);
 P_NODE displayOldestTask(P_NODE);
 P_NODE displayRangeOfTasks(P_NODE);
 P_NODE displayAllTasks(P_NODE);
-P_NODE searchTask(P_NODE, char[]);
+P_NODE searchTask(P_NODE);
 P_NODE getLastItemInList(P_NODE);
 void saveTasks(P_NODE);
 P_NODE readTasks(P_NODE);

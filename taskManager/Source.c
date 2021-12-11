@@ -61,9 +61,7 @@ int main()
             break;
 
         case 'g':
-            printf("What task do you want to search for?: ");
-            scanf("%s", &task);
-            searchTask(list, task);
+            searchTask(list);
             printOptions();
             break;
 
