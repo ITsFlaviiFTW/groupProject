@@ -143,6 +143,7 @@ P_NODE displayRecentTask(P_NODE list) {
     }
 
     printf("This is the most recent task within the list\n");
+    printf("%s\n", currentTask->task);
 }
 
 P_NODE displayRangeOfTasks(P_NODE list) {
