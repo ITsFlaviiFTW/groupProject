@@ -1,8 +1,8 @@
 #include "Header.h"
 
-
-void printOptions() {
-
+//this menu displays all the possible options of the program
+void printOptions() 
+{
     printf("\n");
     printf("Welcome to your task manager\n");
     printf("a) Add new task\n");
@@ -19,7 +19,8 @@ void printOptions() {
 }
 
 
-
+//this function (addTask) works in conjuction with the createTask function to create and add tasks to the list
+//the addTask function also asks for user input to add a task to
 P_NODE addTask(P_NODE list) {
 
     char task[MAXLEN];
@@ -43,11 +44,11 @@ P_NODE createTask(char task[])
     strcpy(newTask->task, task);
 
     newTask->next = NULL;
-    newTask->prev = NULL;
 
     return newTask;
 }
 
+//this function updates the list when adding, deleting or getting the order of a task
 P_NODE updateList(P_NODE list, P_NODE newTask) {
     if (list == NULL)
     {
@@ -55,24 +56,38 @@ P_NODE updateList(P_NODE list, P_NODE newTask) {
     }
     else
     {
-        P_NODE currentTask = list;
-        P_NODE prevTask = list->prev;
-        while (currentTask->next != NULL)
-        {
-            currentTask = currentTask->next;
+        P_NODE last = getLastItemInList(list);
+        if (last != NULL) {
+            last->next = newTask;
         }
-        prevTask = currentTask;
-        currentTask->next = newTask;
-        newTask->prev = prevTask;
     }
     return list;
 }
+//this function gets the last task from the task list
+P_NODE getLastItemInList(P_NODE list) {
+    if (list == NULL) 
+    {
+        printf("No task to display!");
+        return NULL;
+        
+    }
+    P_NODE current = list;
+    P_NODE prev = NULL;
+    while (current != NULL)
+    {
+        prev = current;
+        current = current->next;
+    }
+    return prev;
+}
 
-void deleteTask(P_NODE list)
+P_NODE deleteTask(P_NODE list)
 {
+    //the way we were checking for strcpy, we were overloading the value for strcmp, it was treating it like a boolean
+   
     if (list == NULL)
     {
-        printf("No tasks to delete!\n");
+        printf("No tasks available to delete!\n");
         return;
     }
     char search_task[MAXLEN];
@@ -81,38 +96,36 @@ void deleteTask(P_NODE list)
     fgets(search_task, MAXLEN, stdin);
     search_task[strlen(search_task) - 1] = '\0';
 
+    //
     P_NODE current = list;
-
-    if (!strcmp(current->task, search_task))
-    {
-        if (current->next != NULL)
-        {
-            list = current->next;
-        }
-        else
-            list = NULL;
-
-        free(current);
-        return;
-    }
-    else
-    {
-        P_NODE previous = list;
-        while (current != NULL && strcmp(current->task, search_task))
-        {
-            previous = current;
-            current = current->next;
+    P_NODE prev = NULL;
+    //
+    do {
+        //compares the string value from the node to the string value received from the user
+        //if the strings are the same, the task will be deleted
+        if (strcmp(current->task, search_task) == 0) 
+        { // Match found
+            if (prev == NULL) 
+            { // At the head of the list
+                list = current->next;
+            }
+            else 
+            {
+                prev->next = current->next;
+            }
+            free(current);
+            return list;
         }
 
-        if (current == NULL)
-            return;
-        previous->next = current->next;
+        prev = current;
+        current = current->next;
 
-        free(current);
-    }
+    } 
+    while (current != NULL);
 }
 
 P_NODE displayRecentTask(P_NODE list) {
+
 
     if (list == NULL) {
 
@@ -120,24 +133,9 @@ P_NODE displayRecentTask(P_NODE list) {
 
     }
 
-    P_NODE currentTask = list;
+    P_NODE mostRecent = getLastItemInList(list);
 
-    if (currentTask == NULL) {
-
-        return NULL;
-
-    }
-
-    else {
-
-        printf("%s\n", currentTask->task);
-
-    }
-
-    printf("This is the most recent task within the list\n");
-
-    return;
-
+    printf("This is the most recent task within the list: %s\n", mostRecent->task);
 }
 
 P_NODE displayRangeOfTasks(P_NODE list) {
@@ -248,14 +246,21 @@ void saveTasks(P_NODE list) {
     fclose(fp);
 }
 
-void readTasks(P_NODE list) {
+void readTasks(P_NODE list)
+{
     FILE* fp;
     fp = fopen("taskList.txt", "r+");
-    char tempVal[MAXLEN];
+    //char tempVal[MAXLEN];
     char tempTask[MAXLEN];
+    P_NODE tempLists;
 
-    while (fgets(tempVal, MAXLEN, fp) != NULL)
+    while (fgets(tempTask, MAXLEN, fp) != NULL)
     {
+        fgets(tempTask, MAXLEN, fp);
+        tempTask[strlen(tempTask) - 1] = '\0';
 
+        tempLists = createTask(tempTask);
+        list = updateList(list, tempLists);
     }
+    fclose(fp);
 }

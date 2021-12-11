@@ -6,6 +6,7 @@ int main()
 {
     P_NODE list = NULL; //list of tasks - empty
     char task[MAXLEN];
+    readTasks(list);
 
     printOptions();
 
@@ -23,7 +24,7 @@ int main()
             break;
 
         case 'b':
-            deleteTask(list);
+            list = deleteTask(list);
             printOptions();
             break;
 
