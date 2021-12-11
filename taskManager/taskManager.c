@@ -10,10 +10,11 @@ void printOptions(){
     printf("b) Delete an existing task\n");
     printf("c) Update an existing task\n");
     printf("d) Display most recently entered task\n");
-    printf("e) Display 'x' number of tasks\n");
-    printf("f) Display all tasks\n");
-    printf("g) Search for a task\n");
-    printf("h) Quit\n");
+    printf("e) Display oldest task in the list\n");
+    printf("f) Display 'x' number of tasks\n");
+    printf("g) Display all tasks\n");
+    printf("h) Search for a task\n");
+    printf("i) Quit\n");
     printf("Please enter the operation number for the desired option: ");
     printf("\n");
 
@@ -40,7 +41,6 @@ P_NODE addTask(P_NODE list) {
 P_NODE createTask(char task[])
 {
     P_NODE newTask = (P_NODE)malloc(sizeof(NODE));
-    //newTask->val = val;
     strcpy(newTask->task, task);
 
     newTask->next = NULL;
@@ -91,7 +91,7 @@ P_NODE deleteTask(P_NODE list) {
     return list;
 }
 
-P_NODE displayRecentTask(P_NODE list) {
+P_NODE displayOldestTask(P_NODE list) {
 
     if (list == NULL) {
 
@@ -113,10 +113,36 @@ P_NODE displayRecentTask(P_NODE list) {
 
     }
 
-    printf("This is the most recent task within the list\n");
+    printf("Your oldest task is %s\n", currentTask->task);
 
     return;
 
+}
+
+P_NODE displayRecentTask(P_NODE list) {
+
+
+    if (list == NULL) {
+
+        return NULL;
+
+    }
+
+    P_NODE currentTask = list;
+
+    if (currentTask == NULL) {
+
+        return NULL;
+
+    }
+
+    while (currentTask->next != NULL) {
+
+        currentTask = currentTask->next;
+
+    }
+
+    printf("This is the most recent task within the list\n");
 }
 
 P_NODE displayRangeOfTasks(P_NODE list) {

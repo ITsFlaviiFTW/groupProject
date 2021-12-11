@@ -36,20 +36,25 @@ int main()
             break;
 
         case 'e':
-            displayRangeOfTasks(list);
+            displayOldestTask(list);
             printOptions();
             break;
 
         case 'f':
-            displayAllTasks(list);
+            displayRangeOfTasks(list);
             printOptions();
             break;
 
         case 'g':
-            searchTask(list, task);
+            displayAllTasks(list);
+            printOptions();
             break;
 
         case 'h':
+            searchTask(list, task);
+            break;
+
+        case 'i':
             continueProgram = false;
             break;
 
