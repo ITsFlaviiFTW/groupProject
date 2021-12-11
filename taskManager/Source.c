@@ -12,7 +12,6 @@
 int main() 
 {
     P_NODE list = NULL; //list of tasks - empty
-    char task[MAXLEN];
 
     list = readTasks(list);
 
@@ -53,7 +52,8 @@ int main()
             break;
 
         case 'g':
-            searchTask(list, task);
+            searchTask(list);
+            printOptions();
             break;
 
         case 'h':

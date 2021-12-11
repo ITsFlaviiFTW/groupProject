@@ -134,30 +134,38 @@ P_NODE displayAllTasks(P_NODE list)
 
 }
 
-P_NODE searchTask(P_NODE list, char search_task[])
+P_NODE searchTask(P_NODE list)
 {
-    if (list == NULL)
+    char search_task[MAXLEN];
+    printf("Please enter the task you would like to search: ");
+    fgets(search_task, MAXLEN, stdin);
+    search_task[strlen(search_task) - 1] = '\0';
+    
+    if (list == NULL) // No list to search for task
     {
+        printf("There are no tasks in the list.\n");
         return NULL;
     }
-
-    if (list->next == NULL)
+    if (list->next == NULL) // Only one task in the list
     {
         if (strcmp(list->task, search_task) == 1)
         {
+            printf("There is a match!\n");
             return list;
         }
         else
         {
+            printf("There is a no match!\n");
             return NULL;
         }
     }
 
     P_NODE currentTask = list;
-    while (currentTask->next != NULL)
+    while (currentTask->next != NULL) // There are multiple tasks in the list
     {
         if (!strcmp(currentTask->task, search_task))
         {
+            printf("There is a match!\n");
             return currentTask;
         }
         else
@@ -165,7 +173,19 @@ P_NODE searchTask(P_NODE list, char search_task[])
             currentTask = currentTask->next;
         }
     }
-    return NULL;
+    if (currentTask->next == NULL) // The search function has iterated through the list until the last task
+    {
+        if (!strcmp(currentTask->task, search_task))
+        {
+            printf("There is a match!\n");
+            return currentTask;
+        }
+        else
+        {
+            printf("There is a no match!\n");
+            return NULL;
+        }
+    }
 }
 
 void saveTasks(P_NODE list)
