@@ -1,3 +1,22 @@
+// PROG71985 - Group Project
+// Task Manager Source File
+// Dante Palalas-Mouradian DEC / 2021
+// Flavius Porumbiel       DEC / 2021
+// Hayden Auterhoff        DEC / 2021
+
+//Version History
+// 0.1 created menu and populated with options
+// 0.2 created addTask, deleteTask, createTask and File I/O functions
+// 0.3 created display functions (displayAllTasks, displayRangeOfTasks)
+// 0.4 created updateList function
+// 0.5 updated deleteTask function
+// 0.6 created displayRecentTask function
+// 0.7 created displayOldestTask function
+// 0.8 updated displayRecentTask and created getLastItemInList function to help clean code
+// 0.9 created searchTask function
+// 1.0 added comments and cleaned up code
+
+
 #include "Header.h"
 
 //this menu displays all the possible options of the program
@@ -7,7 +26,7 @@ void printOptions()
     printf("Welcome to your task manager\n");
     printf("a) Add new task\n");
     printf("b) Delete an existing task\n");
-    printf("c) Update an existing task\n");
+    printf("c) Display the oldest entered task\n");
     printf("d) Display most recently entered task\n");
     printf("e) Display 'x' number of tasks\n");
     printf("f) Display all tasks\n");
@@ -63,16 +82,16 @@ P_NODE updateList(P_NODE list, P_NODE newTask) {
     }
     return list;
 }
-//this function gets the last task from the task list
+//this function is the "back-end" for the "displayRecentTask" function and it gets the last task in the list, if any
 P_NODE getLastItemInList(P_NODE list) {
     if (list == NULL) 
     {
-        printf("No task to display!");
         return NULL;
         
     }
     P_NODE current = list;
     P_NODE prev = NULL;
+    //if the list is populated, the function will bring the latest task forward
     while (current != NULL)
     {
         prev = current;
@@ -81,9 +100,9 @@ P_NODE getLastItemInList(P_NODE list) {
     return prev;
 }
 
+//this function deletes a task from the list
 P_NODE deleteTask(P_NODE list)
 {
-    //the way we were checking for strcpy, we were overloading the value for strcmp, it was treating it like a boolean
    
     if (list == NULL)
     {
@@ -91,7 +110,6 @@ P_NODE deleteTask(P_NODE list)
         return;
     }
     char search_task[MAXLEN];
-    //char search_task[MAXLEN];
     printf("Please enter the task to be removed: ");
     fgets(search_task, MAXLEN, stdin);
     search_task[strlen(search_task) - 1] = '\0';
@@ -124,13 +142,14 @@ P_NODE deleteTask(P_NODE list)
     while (current != NULL);
 }
 
+//this function is the "front-end" and it lets the user know the what the last task in the list is, if any
 P_NODE displayRecentTask(P_NODE list) {
 
 
-    if (list == NULL) {
-
+    if (list == NULL) 
+    {
+        printf("No task to display!\n");
         return NULL;
-
     }
 
     P_NODE mostRecent = getLastItemInList(list);
@@ -138,61 +157,76 @@ P_NODE displayRecentTask(P_NODE list) {
     printf("This is the most recent task within the list: %s\n", mostRecent->task);
 }
 
+//this function displays the oldest (or first) task in the list
+P_NODE displayOldestTask(P_NODE list) {
+
+    if (list == NULL) 
+    {
+        return NULL;
+    }
+
+    P_NODE currentTask = list;
+
+    if (currentTask == NULL) 
+    {
+        return NULL;
+    }
+    else {
+        printf("%s\n", currentTask->task);
+    }
+
+    printf("This is the oldest task within the list: %s\n", currentTask->task);
+    return;
+}
+
+//this function displays a range of tasks, if any from the user's choice.
 P_NODE displayRangeOfTasks(P_NODE list) {
 
     int i;
     int end;
 
-    if (list == NULL) {
-
+    if (list == NULL) 
+    {
         return NULL;
-
     }
 
     P_NODE currentTask = list;
 
-    if (currentTask == NULL) {
-
+    if (currentTask == NULL) 
+    {
         return NULL;
-
     }
 
     printf("How many tasks would you like shown?\n");
     scanf_s("%d", &end);
 
-    for (i = 0; i < end; i++) {
-
+    for (i = 0; i < end; i++) 
+    {
         printf("%s\n", currentTask->task);
         currentTask = currentTask->next;
-
-
     }
-
-
+    printOptions();
 }
 
-
+// this function displays all the available tasks within a list, if any are available
 P_NODE displayAllTasks(P_NODE list) {
 
-    if (list == NULL) {
-
+    if (list == NULL) 
+    {
         return NULL;
-
     }
 
     P_NODE currentTask = list;
 
-    if (currentTask == NULL) {
-
+    if (currentTask == NULL) 
+    {
         return NULL;
-
     }
 
-    while (currentTask != NULL) {
-
+    while (currentTask != NULL)
+    {
         printf("%s\n", currentTask->task);
         currentTask = currentTask->next;
-
     }
 
     printf("These are all tasks within the list\n");
@@ -200,7 +234,7 @@ P_NODE displayAllTasks(P_NODE list) {
     return;
 
 }
-
+//this function asks the user to input the name of a specific task within a list, and, if any exist or match the user's input, the task will be displayed
 P_NODE searchTask(P_NODE list, char search_task[]) {
     if (list == NULL)
     {
@@ -234,6 +268,7 @@ P_NODE searchTask(P_NODE list, char search_task[]) {
     return NULL;
 }
 
+//this is a File I/O function that saves the user input to a text file
 void saveTasks(P_NODE list) {
     FILE* fp;
     fp = fopen("taskList.txt", "w+");
@@ -246,7 +281,8 @@ void saveTasks(P_NODE list) {
     fclose(fp);
 }
 
-void readTasks(P_NODE list)
+//this is a File I/O function that reads the data, if any, from the text file that has been created
+P_NODE readTasks(P_NODE list)
 {
     FILE* fp;
     fp = fopen("taskList.txt", "r+");
@@ -256,11 +292,11 @@ void readTasks(P_NODE list)
 
     while (fgets(tempTask, MAXLEN, fp) != NULL)
     {
-        fgets(tempTask, MAXLEN, fp);
         tempTask[strlen(tempTask) - 1] = '\0';
 
         tempLists = createTask(tempTask);
         list = updateList(list, tempLists);
     }
     fclose(fp);
+    return list;
 }

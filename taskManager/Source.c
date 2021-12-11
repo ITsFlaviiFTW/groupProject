@@ -1,12 +1,24 @@
-#include "Header.h"
+// PROG71985 - Group Project
+// Task Manager Source File
+// Dante Palalas-Mouradian DEC / 2021
+// Flavius Porumbiel       DEC / 2021
+// Hayden Auterhoff        DEC / 2021
 
+//Version History
+// 0.1 created switch case with the cases "a" to "h" to match the menu options
+// 0.2 created and distributed the different functions to the different cases
+// 0.3 added the "saveTasks" File I/O function so that the user input saves to a text file
+// 0.4 added the "readTasks" File I/O function so that the user input loads from the text file into the program
+// 0.5 added comments and cleaned up code
+
+#include "Header.h"
 
 
 int main()
 {
     P_NODE list = NULL; //list of tasks - empty
     char task[MAXLEN];
-    readTasks(list);
+    list = readTasks(list);
 
     printOptions();
 
@@ -29,7 +41,8 @@ int main()
             break;
 
         case 'c':
-            //Update an existing task
+            displayOldestTask(list);
+            printOptions();
             break;
 
         case 'd':
@@ -48,7 +61,10 @@ int main()
             break;
 
         case 'g':
+            printf("What task do you want to search for?: ");
+            scanf("%s", &task);
             searchTask(list, task);
+            printOptions();
             break;
 
         case 'h':
