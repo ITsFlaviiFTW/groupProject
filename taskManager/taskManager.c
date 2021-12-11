@@ -107,8 +107,30 @@ P_NODE deleteTask(P_NODE list)
     return list;
 }
 
-void displayTask()
+P_NODE displayAllTasks(P_NODE list) 
 {
+    if (list == NULL) {
+
+        return NULL;
+
+    }
+
+    P_NODE currentTask = list;
+
+    if (currentTask == NULL) 
+    {
+       return NULL;
+    }
+
+    while (currentTask != NULL) 
+    {
+        printf("%s\n", currentTask->task);
+        currentTask = currentTask->next;
+    }
+
+    printf("These are all tasks within the list\n");
+
+    return;
 
 }
 
@@ -160,14 +182,22 @@ void saveTasks(P_NODE list)
     fclose(fp);
 }
 
-void readTasks(P_NODE list)
+P_NODE readTasks(P_NODE list)
 {
     FILE* fp;
     fp = fopen("taskList.txt", "r+");
-    char tempVal[MAXLEN];
+    //char tempVal[MAXLEN];
     char tempTask[MAXLEN];
+    P_NODE tempLists;
 
-    while (fgets(tempVal, MAXLEN, fp) != NULL)
+    while (fgets(tempTask, MAXLEN, fp) != NULL)
     {
+        tempTask[strlen(tempTask) - 1] = '\0';
+
+        tempLists = createTask(tempTask);
+        list = updateList(list, tempLists);
     }
+    fclose(fp);
+
+    return list;
 }

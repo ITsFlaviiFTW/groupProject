@@ -14,6 +14,8 @@ int main()
     P_NODE list = NULL; //list of tasks - empty
     char task[MAXLEN];
 
+    list = readTasks(list);
+
     printOptions();
 
     bool continueProgram = true;
@@ -46,7 +48,8 @@ int main()
             break;
 
         case 'f':
-            // displayTask();
+            displayAllTasks(list);
+            printOptions();
             break;
 
         case 'g':

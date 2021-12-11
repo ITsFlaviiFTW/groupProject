@@ -22,7 +22,8 @@ P_NODE addTask(P_NODE);
 P_NODE createTask(char[]);
 P_NODE updateList(P_NODE, P_NODE);
 P_NODE deleteTask(P_NODE);
-void displayTask(P_NODE);
-
+P_NODE displayAllTasks(P_NODE);
 P_NODE searchTask(P_NODE, char[]);
+
 void saveTasks(P_NODE);
+P_NODE readTasks(P_NODE);
